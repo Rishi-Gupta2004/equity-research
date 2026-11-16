@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rishi Gupta · Equity Research</title>
+<meta name="description" content="Sell-side style equity research on US and ASX technology stocks: reverse DCF first, pre-committed falsifiers, an internal Red Team, and every number tied out in code.">
+<style>
+  :root{
+    --navy:#0B2545; --steel:#2F5F8F; --sky:#8DB3DB; --peer:#A6ACB3;
+    --burgundy:#8B1A1A; --ink:#1A1A1A; --grey:#6B7280; --rule:#D0D5DC; --tint:#F1F3F6;
+    --green:#1F6B3A;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;color:var(--ink);background:#fff;font-size:15px;line-height:1.55}
+  h1,h2,h3,.band,.kicker{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+  a{color:var(--steel)}
+  a:hover{color:var(--navy)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+  /* band */
+  .band{background:var(--navy);color:#fff}
+  .band .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-top:30px;padding-bottom:26px;flex-wrap:wrap}
+  .band .title{flex:1 1 520px;max-width:700px}
+  .house{font-size:11px;letter-spacing:.22em;color:var(--sky);font-weight:700;text-transform:uppercase;margin:0 0 6px}
+  .band h1{margin:0;font-size:34px;line-height:1.1;font-weight:700}
+  .band .sub{margin:6px 0 0;color:#D6E2EF;font-size:14px}
+  .band .meta{text-align:right;font-size:12px;color:#D6E2EF;line-height:1.7}
+  .band .meta b{color:#fff;letter-spacing:.12em;font-size:11px}
+  nav{background:#fff;border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:5}
+  nav .wrap{display:flex;gap:22px;flex-wrap:wrap;padding-top:11px;padding-bottom:11px}
+  nav a{text-decoration:none;color:var(--navy);font-size:13px;font-weight:700;letter-spacing:.04em}
+  nav a:hover{color:var(--steel)}
+
+  /* sections */
+  section{padding:38px 0 6px}
+  h2{color:var(--navy);font-size:21px;margin:0 0 14px;padding-bottom:7px;border-bottom:2px solid var(--navy)}
+  h3{color:var(--steel);font-size:15px;margin:22px 0 8px}
+  p{margin:0 0 12px}
+  .lead b{color:var(--navy)}
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:30px;align-items:start}
+  @media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}.band .meta{text-align:left}}
+  @media (max-width:560px){.band h1{font-size:26px}.wrap{padding:0 18px}body{font-size:14.5px}}
+
+  /* rating box */
+  .box{border:1px solid var(--rule);border-top:3px solid var(--navy)}
+  .box .hd{background:var(--navy);color:#fff;font-size:11px;letter-spacing:.14em;font-weight:700;padding:8px 12px;text-transform:uppercase}
+  .box table{width:100%;border-collapse:collapse;font-size:13px}
+  .box td{padding:7px 12px;border-bottom:1px solid var(--rule)}
+  .box td:first-child{color:var(--grey)}
+  .box td:last-child{text-align:right;font-weight:700;color:var(--navy)}
+  .box .cover{display:block;padding:12px;background:var(--tint);text-align:center}
+  .box .cover img{width:100%;max-width:300px;border:1px solid var(--rule);box-shadow:0 2px 8px rgba(11,37,69,.12)}
+  .box .links{padding:10px 12px;font-size:13px;display:flex;gap:14px;flex-wrap:wrap}
+  .pos{color:var(--green)!important}
+  .neg{color:var(--burgundy)!important}
+
+  /* tables */
+  table.t{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0 8px;border-top:2px solid var(--navy);border-bottom:2px solid var(--navy)}
+  table.t th{text-align:left;color:var(--navy);font-weight:700;border-bottom:1px solid var(--navy);padding:8px 10px;font-size:12.5px}
+  table.t td{padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+  table.t tr:last-child td{border-bottom:none}
+  table.t td.n,table.t th.n{text-align:right;white-space:nowrap}
+  .scroll{overflow-x:auto}
+  .src{color:var(--grey);font-size:12px;margin:2px 0 14px}
+  .ex{font-size:13px;font-weight:700;color:var(--navy);margin:16px 0 2px}
+  .ex span{color:var(--steel)}
+
+  /* pipeline */
+  .steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:8px 0 12px}
+  @media (max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+  .step{background:var(--tint);border-top:3px solid var(--steel);padding:12px 12px 10px;font-size:13px}
+  .step .no{font-size:11px;letter-spacing:.14em;color:var(--steel);font-weight:700}
+  .step h4{margin:3px 0 6px;color:var(--navy);font-size:14px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+  .step .tag{display:inline-block;margin-top:6px;font-size:11px;color:var(--grey)}
+  ol.rules{padding-left:20px;margin:6px 0 14px}
+  ol.rules li{margin:0 0 8px}
+  ol.rules b{color:var(--navy)}
+
+  .shot{border:1px solid var(--rule);width:100%;display:block}
+  .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:10px 0}
+  @media (max-width:860px){.cards{grid-template-columns:1fr}}
+  .card{border:1px solid var(--rule);padding:12px 14px;font-size:13.5px}
+  .card b{color:var(--navy);display:block;margin-bottom:4px}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:2px solid var(--navy);border-bottom:2px solid var(--navy);margin:8px 0 14px}
+  @media (max-width:700px){.cols{grid-template-columns:1fr}}
+  .cols>div{padding:12px 16px}
+  .cols>div:first-child{border-right:1px solid var(--rule)}
+  .cols h4{margin:0 0 8px;color:var(--navy);font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+  .cols ul{margin:0;padding-left:18px;font-size:13.5px}
+  .cols li{margin-bottom:5px}
+
+  .about-facts{list-style:none;padding:0;margin:0 0 12px}
+  .about-facts li{padding:7px 0;border-bottom:1px solid var(--rule);font-size:14px;display:grid;grid-template-columns:110px minmax(0,1fr);gap:8px}
+  .about-facts li span{color:var(--grey)}
+
+  footer{margin-top:40px;border-top:1px solid var(--rule);background:var(--tint)}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:16px;padding-bottom:22px;font-size:11.5px;color:var(--grey)}
+  footer p{max-width:720px;margin:0}
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap">
+    <div class="title">
+      <p class="house">Rishi Gupta | Equity Research</p>
+      <h1>Sell-side style research on<br>US and ASX technology stocks</h1>
+      <p class="sub">Reverse DCF first. Three falsifiers committed before publication. A Red Team against every rating. Every number tied out in code.</p>
+    </div>
+    <div class="meta">
+      <b>SYDNEY, AUSTRALIA</b><br>
+      <a href="https://rishireport.substack.com" style="color:#fff">Substack</a> ·
+      <a href="https://www.linkedin.com/in/rishi-gupta" style="color:#fff">LinkedIn</a> ·
+      <a href="https://github.com/Rishi-Gupta2004/equity-research" style="color:#fff">GitHub</a><br>
+      <a href="mailto:Rishi.Gupta2004@protonmail.com" style="color:#fff">Rishi.Gupta2004@protonmail.com</a>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#research">Research</a>
+    <a href="#track-record">Track record</a>
+    <a href="#process">Process</a>
+    <a href="#model">Model RG</a>
+    <a href="#ai">How I use AI</a>
+    <a href="#about">About</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="research">
+    <h2>Published research</h2>
+    <div class="grid">
+      <div>
+        <p class="lead"><b>Tyler Technologies (NYSE: TYL): Initiation of coverage, 27 October 2026.</b> Tyler sells software and payments to US state and local government. FY2025 revenue was US$2,332m, 87% of it recurring, as the installed base moves from on-premises maintenance to SaaS.</p>
+
+        <p class="ex"><span>Variant view,</span> from the note</p>
+        <p style="border-left:3px solid var(--steel);padding:4px 0 4px 14px;font-style:italic">Revenue growth as a result of legacy software conversion is more synergistic than what market consensus suggests. We see revenue in 2027 and 2028 growing 13% and 14.4% respectively. This represents a significant uplift from consensus estimates of 9.8% / 8.2%.</p>
+
+        <p class="ex"><span>Pivotal questions</span> and our answers</p>
+        <div class="scroll"><table class="t">
+          <tr><th>#</th><th>Question</th><th>Answer</th></tr>
+          <tr><td>1</td><td>Will organic SaaS revenue growth hold at or above 20% in each of FY2026, FY2027 and FY2028?</td><td>Yes</td></tr>
+          <tr><td>2</td><td>Will maintenance revenue fall by at least 7% in each of FY2027 and FY2028?</td><td>Yes</td></tr>
+          <tr><td>3</td><td>Will GAAP operating margin reach 20% or more in FY2028?</td><td>No</td></tr>
+        </table></div>
+
+        <p class="ex"><span>Scenarios,</span> US$ per share at the 12-month target date</p>
+        <div class="scroll"><table class="t">
+          <tr><th>Case</th><th class="n">Probability</th><th class="n">Target</th><th class="n">Return</th><th>Subscription growth FY27 to FY29</th></tr>
+          <tr><td>Bull</td><td class="n">25%</td><td class="n">446.58</td><td class="n pos">+35.5%</td><td>22%, 23%, 24%</td></tr>
+          <tr><td>Base</td><td class="n">50%</td><td class="n">395.74</td><td class="n pos">+20.1%</td><td>19%, 20%, 21%</td></tr>
+          <tr><td>Bear</td><td class="n">25%</td><td class="n">300.33</td><td class="n neg">-8.9%</td><td>14%, 14%, 14%</td></tr>
+          <tr><td><b>Probability-weighted</b></td><td class="n">100%</td><td class="n"><b>384.60</b></td><td class="n pos"><b>+16.7%</b></td><td></td></tr>
+        </table></div>
+        <p class="src">Source: TYL initiation, 27 October 2026. Returns on the US$329.55 reference price (close, 9 October 2026).</p>
+
+        <p><b style="color:var(--navy)">Next:</b> Macquarie Technology Group (ASX: MAQ), initiation in progress.</p>
+      </div>
+
+      <aside class="box">
+        <div class="hd">Latest note · Initiation</div>
+        <a class="cover" href="research/2026-10-27-TYL-initiation/TYL-Initiation-2026-10-27.pdf"><img src="assets/tyl-cover.png" alt="Tyler Technologies initiation, page 1"></a>
+        <table>
+          <tr><td>Company</td><td>Tyler Technologies</td></tr>
+          <tr><td>Rating</td><td>Buy</td></tr>
+          <tr><td>12-month target</td><td>US$395.74</td></tr>
+          <tr><td>Reference price (9 Oct 2026)</td><td>US$329.55</td></tr>
+          <tr><td>Implied total return</td><td class="pos">+20.1%</td></tr>
+          <tr><td>Conviction</td><td>High</td></tr>
+        </table>
+        <div class="links">
+          <a href="research/2026-10-27-TYL-initiation/TYL-Initiation-2026-10-27.pdf">Read the note (PDF, 18pp)</a>
+          <a href="https://github.com/Rishi-Gupta2004/equity-research/tree/main/research/2026-10-27-TYL-initiation">Summary</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="track-record">
+    <h2>Track record</h2>
+    <p>Every call stays on the record, whichever way it goes. Notes are never edited after publication; changes go into a dated thesis update.</p>
+    <div class="scroll"><table class="t">
+      <tr><th>Note</th><th>Rating</th><th class="n">Target</th><th class="n">Reference price</th><th class="n">Latest close</th><th class="n">Move</th><th>Target reached</th><th>Falsifiers</th></tr>
+      <tr><td>TYL initiation, 27 Oct 2026</td><td>Buy</td><td class="n">US$395.74</td><td class="n">US$329.55</td><td class="n">US$424.06</td><td class="n pos">+28.7%</td><td>2 Nov 2026</td><td>2 at risk, 1 not yet testable</td></tr>
+    </table></div>
+    <p class="src">Prices as at the 13 November 2026 close. Absolute share price moves, not relative to a benchmark. No revised target has been published.</p>
+
+    <h3>Falsifiers committed before publication</h3>
+    <div class="scroll"><table class="t">
+      <tr><th>#</th><th>The thesis is wrong if</th><th>Status</th></tr>
+      <tr><td>1</td><td>Organic SaaS growth is below 18% for two consecutive quarters, from Q3 2026</td><td><b class="neg">At risk.</b> Q3 printed 16.3%; Q4 (February 2027) decides it</td></tr>
+      <tr><td>2</td><td>Maintenance revenue declines by less than 5% for two consecutive quarters in 2027</td><td>Not yet testable</td></tr>
+      <tr><td>3</td><td>FY2026 revenue comes in below US$2,575m, the top of the original guidance</td><td><b class="neg">At risk.</b> The top of guidance was trimmed to US$2,565m in October</td></tr>
+    </table></div>
+
+    <h3>Notional portfolio</h3>
+    <p>The research feeds an AUD 10,000 notional portfolio run under a written <a href="https://github.com/Rishi-Gupta2004/equity-research/blob/main/framework/investment-policy.md">investment policy</a>: a 50/50 S&amp;P 500 and S&amp;P/ASX 200 total return benchmark, a +300bp objective, sizing by conviction tier, and mandatory exit when a falsifier breaches. It has been in cash since inception on 1 September 2026. A position needs a published Buy that still clears +12% on the publication date, and TYL closed that day at US$378.62, leaving +4.5% to target.</p>
+  </section>
+
+  <section id="process">
+    <h2>How I research</h2>
+    <div class="steps">
+      <div class="step"><div class="no">STAGE 1</div><h4>Business model analysis</h4>How the company makes money, unit economics, moat, failure modes, what the price implies.<br><span class="tag">Private workpaper</span></div>
+      <div class="step"><div class="no">STAGE 2</div><h4>Earnings memos</h4>Ten points per quarter: reported against consensus, KPIs, guidance credibility.<br><span class="tag">Private workpaper</span></div>
+      <div class="step"><div class="no">STAGE 3</div><h4>Model</h4>Three statements, forecast, DCF, reverse DCF and Monte Carlo in Model RG.<br><span class="tag">Screenshots below</span></div>
+      <div class="step"><div class="no">STAGE 4</div><h4>Initiation</h4>About 24 pages, 20 sections, four gates where drafting stops for my judgement.<br><span class="tag">Published</span></div>
+      <div class="step"><div class="no">STAGE 5</div><h4>Monitoring</h4>Falsifier status each quarter, thesis updates, and the track record.<br><span class="tag">Published</span></div>
+    </div>
+
+    <h3>Standing rules</h3>
+    <ol class="rules">
+      <li><b>The reverse DCF leads.</b> Valuation opens with what the price already requires, then argues why that path is wrong.</li>
+      <li><b>The method fits the business:</b> forward DCF, sum of the parts or multiples on a named comp set, with the reason stated.</li>
+      <li><b>Three falsifiers, committed before publication.</b> Specific, observable and dated. A share price fall doesn't count.</li>
+      <li><b>Every note argues against itself.</b> The Red Team makes the strongest case against the rating and tests whether the falsifiers can fire.</li>
+      <li><b>Numbers are computed, not typed.</b> Every table is recalculated in Python before publication, and a 27-point tie-out runs on every note.</li>
+    </ol>
+
+    <div class="cards">
+      <div class="card"><b>Initiation structure</b>Section map, page budget, gates, and the four tests a pivotal question must pass. <a href="https://github.com/Rishi-Gupta2004/equity-research/blob/main/framework/initiation-structure.md">Read</a></div>
+      <div class="card"><b>Quality control</b>The 27-point tie-out, built from errors found in published broker research. <a href="https://github.com/Rishi-Gupta2004/equity-research/blob/main/framework/quality-control.md">Read</a></div>
+      <div class="card"><b>House style</b>Exhibit-rail layout, palette, exhibit furniture and voice rules for published notes. <a href="https://github.com/Rishi-Gupta2004/equity-research/blob/main/framework/house-style.md">Read</a></div>
+    </div>
+  </section>
+
+  <section id="model">
+    <h2>Valuation engine: Model RG</h2>
+    <div class="grid">
+      <div>
+        <p class="lead"><b>A company-agnostic valuation engine in Excel VBA</b>, with about 7,500 lines of code across 22 modules and 394 named ranges. One Assumptions sheet drives everything else. Every covered name gets its own copy, and no rated note is published without one.</p>
+        <p class="ex"><span>Exhibit 1:</span> At US$329.55 the price required 11.03% revenue growth from year 3 to year 10, against 11.24% in our base case</p>
+        <a href="https://github.com/Rishi-Gupta2004/equity-research/tree/main/models/model-rg"><img class="shot" src="assets/reverse-dcf-site.png" alt="Reverse DCF output from Model RG, Tyler Technologies run"></a>
+        <p class="src">Source: Model RG, Tyler Technologies run, 24 October 2026.</p>
+      </div>
+      <aside>
+        <div class="cols" style="grid-template-columns:1fr;margin-top:0">
+          <div style="border-right:none">
+            <h4>What it does</h4>
+            <ul>
+              <li>Reverse DCF solver: implied growth, terminal margin, terminal growth and IRR</li>
+              <li>Growth and margin frontier, re-solved across discount rates and terminal methods</li>
+              <li>Forward DCF on unlevered FCF, with a cash-proxy cross-check</li>
+              <li>Monte Carlo: five distributions, correlated draws, autocorrelation, fixed seed</li>
+              <li>Up to four segments; asset-heavy mode</li>
+              <li>Penman reformulation; IFRS 16 adjustment</li>
+              <li>Input audit before every run</li>
+            </ul>
+          </div>
+        </div>
+        <p><a href="https://github.com/Rishi-Gupta2004/equity-research/tree/main/models/model-rg">See the full walkthrough</a></p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="ai">
+    <h2>How I use AI</h2>
+    <p>I use Claude as a research associate under written rules that predate the first note. It does the work a junior associate would do. The judgement stays with me, and every judgement call in a note can be traced to the person who made it.</p>
+    <div class="cols">
+      <div>
+        <h4>I write</h4>
+        <ul>
+          <li>The thesis and the variant view</li>
+          <li>The pivotal questions and my answers</li>
+          <li>The rating, conviction and target decision</li>
+          <li>Scenario probabilities</li>
+          <li>The three falsifiers</li>
+          <li>The conclusion and the decision journal</li>
+        </ul>
+      </div>
+      <div>
+        <h4>AI does</h4>
+        <ul>
+          <li>Data from filings, transcripts and terminals</li>
+          <li>Exhibits, tables and three-statement history</li>
+          <li>Descriptive sections, at my direction</li>
+          <li>The Red Team against my rating, labelled as such</li>
+          <li>Arithmetic checks and the Gate 4 tie-out</li>
+          <li>An independent check of each draft against sources</li>
+        </ul>
+      </div>
+    </div>
+    <p>At four gates in every initiation, drafting stops until my judgement goes in. AI never drafts a placeholder in my sections. <a href="https://github.com/Rishi-Gupta2004/equity-research/blob/main/framework/ai-workflow.md">More on the workflow and tooling</a></p>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <div class="grid">
+      <div>
+        <!-- Rishi: your bio goes here, as one or two <p> paragraphs. -->
+        <ul class="about-facts">
+          <li><span>Role</span><div>Client Services Analyst, CMC Markets, Sydney (since January 2026)</div></li>
+          <li><span>Education</span><div>Bachelor of Business Administration, Finance and Accounting, University of Wollongong (2025). <a href="https://rishi-gupta2004.github.io/AcademicTranscpript/">Academic record</a></div></li>
+          <li><span>Research</span><div><a href="https://rishireport.substack.com">Substack</a></div></li>
+        </ul>
+      </div>
+      <aside class="box">
+        <div class="hd">Contact</div>
+        <table>
+          <tr><td>Email</td><td><a href="mailto:Rishi.Gupta2004@protonmail.com">Rishi.Gupta2004@protonmail.com</a></td></tr>
+          <tr><td>LinkedIn</td><td><a href="https://www.linkedin.com/in/rishi-gupta">rishi-gupta</a></td></tr>
+          <tr><td>GitHub</td><td><a href="https://github.com/Rishi-Gupta2004">Rishi-Gupta2004</a></td></tr>
+        </table>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>All research on this site is personal, prepared in a personal capacity, and does not represent the views of any employer. It is not investment advice and takes no account of any person's objectives, financial situation or needs. No Australian Financial Services Licence is held. Prices as at the 13 November 2026 close unless stated.</p>
+    <span>Rishi Gupta · Equity Research · 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-# Discounted Cash Flow Model — Excel VBA
+# Discounted Cash Flow Model (Excel VBA)
 
 A macro-driven DCF tool built in Excel VBA, designed to streamline the valuation workflow. It offers two distinct approaches depending on what you need.
 

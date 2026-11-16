@@ -1,74 +1,69 @@
-# Rishi Gupta's Finance Project Portfolio
+# Rishi Gupta · Equity Research
 
-Welcome. 
+**Sell-side style equity research on US and ASX technology stocks.** Every note opens its valuation with a reverse DCF, commits to three dated falsifiers before publication, includes a Red Team section arguing against its own rating, and has every number tied out in code.
 
-This is a collection of projects I've built as a student of Finance and more specifically equity valuation. 
-This is mostly Excel VBA tools that solve real problems I've encountered in financial modelling and analysis - some python as well.
-
-I'm just someone who loves stock picking I suppose.
-
-Shout out to some of the individuals who made me fall in love with the game (admiration for many more).
-
-- Aswath Damodaran
-- Martin Shkreli
-- Mark Meldrum 
-
-> 📄 **[About Me →](about-me/index.html)**  
-> A bit more on who I am if you're interested.
+**[Website](https://rishi-gupta2004.github.io/equity-research/)** · **[Substack](https://rishireport.substack.com)** · **[LinkedIn](https://www.linkedin.com/in/rishi-gupta)** · Sydney, Australia
 
 ---
 
-## Projects
+## Published research
 
-### 1. [Rishi's Equity Model](Equity-Analysis-Workbook/)
-<-- Date: 04/2026 -->
+<a href="research/2026-10-27-TYL-initiation/"><img src="assets/tyl-cover.png" width="230" align="right" alt="Tyler Technologies initiation, page 1"></a>
 
-A comprehensive, company-agnostic equity valuation framework built from applying a lot of various experiences into a streamlined VBA powered workbook. 
-I'm super proud of how this one's come. Currently on version **7.2** as of when you're reading this.
+| Date | Company | Note | Rating | 12m target |
+|---|---|---|---|---|
+| 27 Oct 2026 | Tyler Technologies (NYSE: TYL) | [Initiation of coverage](research/2026-10-27-TYL-initiation/) · [PDF](research/2026-10-27-TYL-initiation/TYL-Initiation-2026-10-27.pdf) | Buy | US$395.74 |
 
-Combines the following:
-- A dual-basis DCF (Net Income + UFCF)
-- Monte Carlo simulation with correlated draws and autocorrelation (evolving the concepts from my previous standalone Monte Carlo project through integration)
-- Three-scenario analysis, segment-level revenue modelling
-- Asset-heavy model toggles (allows for a goods vs services switchup)
-- Penman reformulated financials 
+**Variant view, from the note:** *"Revenue growth as a result of legacy software conversion is more synergistic than what market consensus suggests. We see revenue in 2027 and 2028 growing 13% and 14.4% respectively. This represents a significant uplift from consensus estimates of 9.8% / 8.2%."*
 
-**Tech:** Excel VBA 
-- Named Range Architecture
-- Monte Carlo (PERT/Normal/Correlated)
-- DCF Valuation
-- Scenario Analysis
-- Penman Reformulation 
-- Qualitative analysis 
+**Since publication:** the stock passed the target on 2 November 2026. Two of the three falsifiers are now at risk after the Q3 print. Every call stays on the [track record](research/README.md), whichever way it goes.
+
+**Next:** Macquarie Technology Group (ASX: MAQ), initiation in progress.
+
+<br clear="right">
 
 ---
 
-### 2. [Monte Carlo Simulation Engine](monte-carlo-simulation/)
-<-- Date: 10/2025 -->
+## How I work
 
-A simulation macro that models project NPV under uncertainty. 
-
-Inputs follow discrete, triangular, or uniform distributions. The tool runs the simulations, generates a histogram of outcomes, and surfaces the key stats. 
-
-Monte Carlo sims blow my mind and have given me a true appreciation for maths.
-
-**Tech:** Excel VBA 
-- Statistical Distributions
-- Histogram Generation
-- Simulation Logic
+| | |
+|---|---|
+| [Research process](framework/README.md) | Five stages, from private business model teardowns to published notes and quarterly monitoring |
+| [Initiation structure](framework/initiation-structure.md) | A 20-section, roughly 24-page format with four gates where drafting stops for analyst judgement |
+| [Quality control](framework/quality-control.md) | A 27-point pre-publication tie-out, built from errors found in published broker research |
+| [Investment policy](framework/investment-policy.md) | The rules for an AUD 10,000 notional portfolio that holds the research to account |
+| [How I use AI](framework/ai-workflow.md) | AI handles data, exhibits, checking and the Red Team. The thesis, rating and conclusions are mine |
 
 ---
 
-### 3. [Discounted Cash Flow Model](dcf-model/)
-<-- Date: 09/2025 -->
+## Valuation engine: Model RG
 
-A VBA-powered DCF tool with two modes: a dynamic template generator that builds formatted DCF spreadsheets on the fly, and a standalone userform that computes NPV and IRR from direct inputs. Built to make valuation work faster and less error-prone.
+A company-agnostic valuation engine in Excel VBA: forward DCF, a reverse DCF solver, Monte Carlo with correlated draws, scenarios and Penman reformulation. It has about 7,500 lines of code and 394 named ranges. [See how it works](models/model-rg/)
 
-**Tech:** Excel VBA 
-- Subroutines
-- Dynamic Cell Formatting
-- Userforms
+<a href="models/model-rg/"><img src="models/model-rg/screenshots/reverse-dcf.png" alt="Model RG reverse DCF output"></a>
 
 ---
 
-*More projects on the way.*
+## Repository map
+
+| Folder | Contents |
+|---|---|
+| [`research/`](research/) | Published notes, one folder each, and the track record |
+| [`framework/`](framework/) | The rules the research is built to |
+| [`models/model-rg/`](models/model-rg/) | The valuation engine, with screenshots from live runs |
+| [`early-work/`](early-work/) | The first DCF and Monte Carlo tools, built in 2025 |
+
+---
+
+## About
+
+<!-- Rishi: your bio goes here. -->
+
+- Client Services Analyst, CMC Markets, Sydney (since January 2026)
+- Bachelor of Business Administration, Finance and Accounting, University of Wollongong (2025). [Academic record](https://rishi-gupta2004.github.io/AcademicTranscpript/)
+
+**Contact:** [Rishi.Gupta2004@protonmail.com](mailto:Rishi.Gupta2004@protonmail.com) · [LinkedIn](https://www.linkedin.com/in/rishi-gupta)
+
+---
+
+<sub>All research here is personal, prepared in a personal capacity, and does not represent the views of any employer. It is not investment advice and takes no account of any person's objectives, financial situation or needs. No Australian Financial Services Licence is held.</sub>

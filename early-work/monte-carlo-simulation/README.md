@@ -35,7 +35,6 @@ The macro then runs the simulation, producing a full dataset of outcomes.
 
 ## Screenshots
 
-![Userform Input](screenshots/Screenshots.png)
 ![Simulation Message Box](screenshots/Monte_Messagebox.png)
 ![Histogram Output](screenshots/Histogram.png)
 ![Raw Output Data](screenshots/Monte_Output.png)

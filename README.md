@@ -59,7 +59,7 @@ A company-agnostic valuation engine in Excel VBA: forward DCF, a reverse DCF sol
 
 <!-- Rishi: your bio goes here. -->
 
-- Client Services Analyst, CMC Markets, Sydney (since January 2026)
+- Client Services Representative - Analyst, CMC Markets, Sydney (since January 2026)
 - Bachelor of Business Administration, Finance and Accounting, University of Wollongong (2025). [Academic record](https://rishi-gupta2004.github.io/AcademicTranscpript/)
 
 **Contact:** [Rishi.Gupta2004@protonmail.com](mailto:Rishi.Gupta2004@protonmail.com) · [LinkedIn](https://www.linkedin.com/in/rishi-gupta)

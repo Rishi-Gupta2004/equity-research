@@ -1,6 +1,6 @@
 # Rishi Gupta · Equity Research
 
-**Sell-side style equity research on US and ASX technology stocks.** Every note opens its valuation with a reverse DCF, commits to three dated falsifiers before publication, includes a Red Team section arguing against its own rating, and has every number tied out in code.
+**Sell-side style equity research on US and ASX stocks.** 
 
 **[Website](https://rishi-gupta2004.github.io/equity-research/)** · **[Substack](https://rishireport.substack.com)** · **[LinkedIn](https://www.linkedin.com/in/rishi-gupta)** · Sydney, Australia
 
